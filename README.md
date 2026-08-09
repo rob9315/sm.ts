@@ -6,9 +6,9 @@ small state machine library because i was bored
 
 see [`example.ts`](./example.ts) for a state machine implementing the following state machine (see image)
 
-![cs50p vanity board state machine](./example.png)
+![cs50p vanity plates state machine](./example.png)
 
-background: I was asked to help with the [cs50p vanity board]() task which boils down to:
+background: I was asked to help with the [cs50p vanity plates](https://cs50.harvard.edu/python/psets/2/plates/) task which boils down to:
 > Implement is_valid(s):
 > > Return True if s is a valid vanity plate.  
 > > Return False otherwise.
