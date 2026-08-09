@@ -1,4 +1,4 @@
-abstract class IStateMachine<D> {
+export abstract class IStateMachine<D> {
     abstract advance(d: D): boolean;
     abstract check(): boolean;
     and(...others: IStateMachine<D>[]): IStateMachine<D> {
@@ -38,7 +38,7 @@ interface ExitingStateMachineDefinition<D, Labels extends string | number | symb
     transitions: ExitingStateMachineTransitions<D, Labels>,
     acceptance: Record<Labels, boolean>
 }
-class ExitingStateMachine<D, Labels extends string | number | symbol> extends IStateMachine<D> {
+export class ExitingStateMachine<D, Labels extends string | number | symbol> extends IStateMachine<D> {
     private state: Labels;
     private transitions: ExitingStateMachineTransitions<D, Labels>;
     private acceptance: Record<Labels, boolean>;
@@ -74,7 +74,7 @@ interface StateMachineDefinition<D, Labels extends string | number | symbol> {
     transitions: StateMachineTransitions<D, Labels>,
     acceptance: Record<Labels, boolean>
 }
-class StateMachine<D, Labels extends string | number | symbol> extends IStateMachine<D> {
+export class StateMachine<D, Labels extends string | number | symbol> extends IStateMachine<D> {
     private state: Labels;
     private transitions: StateMachineTransitions<D, Labels>;
     private acceptance: Record<Labels, boolean>;
@@ -93,7 +93,7 @@ class StateMachine<D, Labels extends string | number | symbol> extends IStateMac
     }
 }
 
-class StateMachineInvert<D> extends IStateMachine<D> {
+export class StateMachineInvert<D> extends IStateMachine<D> {
     self_rejected: boolean = false;
     constructor(private self: IStateMachine<D>) {
         super();
@@ -108,7 +108,7 @@ class StateMachineInvert<D> extends IStateMachine<D> {
     }
 }
 
-class StateMachineCombiner<D, M extends IStateMachine<D>[]> extends IStateMachine<D> {
+export class StateMachineCombiner<D, M extends IStateMachine<D>[]> extends IStateMachine<D> {
     constructor(private state_machines: M, private combiner: (acceptance: {[I in keyof M]: boolean}) => boolean) {
         super();
     }
@@ -122,3 +122,4 @@ class StateMachineCombiner<D, M extends IStateMachine<D>[]> extends IStateMachin
         return this.combiner(this.state_machines.map(m=>m.check()) as {[I in keyof M]: boolean});
     }
 }
+
